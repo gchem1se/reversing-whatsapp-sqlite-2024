@@ -1,4 +1,4 @@
-# Reversing Whatsapp's SQLite (in 2024)
+# Reversing WhatsApp's SQLite (in 2024)
 ## Overview
 This repository documents my process of trying a reverse-engineering of the database schema and key tables in WhatsApp's SQLite databases. 
 
