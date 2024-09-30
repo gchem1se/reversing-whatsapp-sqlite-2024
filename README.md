@@ -16,7 +16,7 @@ As this has been an individual project, I had to rely on versions I personally u
 ## Motivations
 The primary goal of this project is to grant users the possibility to freely access messages they exchanged and data they generated through the app, circumventing some annoying limitations the application had since a long time.
 
-WhatsApp's application does indeed offer an "Export Chat" feature, but that forces you to accept some constraints. [Their FAQ states](https://faq.whatsapp.com/1180414079177245/?cms_platform=android):
+WhatsApp's application does indeed offer an "Export Chat" feature, but that forces you to accept some constraints you can read in their [FAQ page](https://faq.whatsapp.com/1180414079177245/?cms_platform=android), mainly:
 
 1. The application enables you to export a chat in a (rather ugly) `.txt` file, but if you choose to include media in the export, only the most recent media sent will be added as attachments to be sent from your sharesheet.
 2. In addition to that, when exporting with media or without media, you can only get up to 100,000 latest messages to be exported.
