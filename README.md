@@ -19,7 +19,7 @@ The primary goal of this project is to grant users the possibility to freely acc
 WhatsApp's application does indeed offer an "Export Chat" feature, but that forces you to accept some constraints you can read in their [FAQ page](https://faq.whatsapp.com/1180414079177245/?cms_platform=android), mainly:
 
 1. The application enables you to export a chat in a (rather ugly) `.txt` file, but if you choose to include media in the export, only the most recent media sent will be added as attachments to be sent from your sharesheet.
-2. In addition to that, when exporting with media or without media, you can only get up to 100,000 latest messages to be exported.
+2. When exporting with media or without media, you can only get up to 100,000 latest messages to be exported.
 
 The only other way to review some older messages would be to rely on WhatsApp's internal mechanism of handling backups and restores. That involves, in most cases, trusting a major cloud service for storing your backups, and be willing to start a recovery process that can only be triggered by deleting the application entirely and re-installing it. They do not handle different versions of the backup, so if the backup process produces a corrupted file, you will end up with nothing being restored (it actually happened to me). 
 Finally, you can only do it that many times, since repeating the phone number verification process (you are asked for that during the initial setup of a freshly installed instance of the app) within limited time periods could flag you as a potentially malicious user, locking you out of your account for a day or so.
