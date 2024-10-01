@@ -1,0 +1,82 @@
+site_name: Reversing WhatsApp's SQLite
+site_description: Documentation powered by MkDocs
+site_author: gchem1se
+
+# Set the index page to Index.md
+nav:
+  - Home: index.md
+  - Getting started: Getting started
+  - Notes on databases encryption and how to get your decryption key: Notes on databases encryption and how to get your decryption key
+  - Launching a backup manually: Launching a backup manually
+  - Chats and Groups: Chats and Groups
+  - Get messages from a conversation: Get messages from a conversation
+  - Message attachments and media files: Message attachments and media files
+  - Contacts: Contacts
+  - System messages: System messages
+  - Stickers: Stickers
+  - Statistics: Statistics
+  - Queries: Queries
+
+# Configure theme (optional)
+theme:
+  name: 'material'
+  palette:
+    scheme: slate
+    primary: teal
+  features:
+    - content.code.copy
+
+# Define static content directory for images
+extra:
+  static_dir: 'docs/img'
+
+# Specify where to find static files like images
+extra_css:
+  - 'img/custom.css'  # If you have custom styles
+extra_javascript:
+  - 'img/custom.js'  # If you have custom scripts
+
+# Use the img folder for images
+markdown_extensions:
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - markdown.extensions.extra
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite
+  - nl2br
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - callouts
+  - glightbox:
+       touchNavigation: true
+       loop: false
+       effect: zoom
+       width: 100%
+       height: auto
+       zoomable: true
+       draggable: false
+       skip_classes:
+         - custom-skip-class-name
+       auto_caption: false
+       caption_position: bottom
+       background: white
+       shadow: true
+       shadow: true
+       manual: false
+# Configuration for the docs directory and static content
+docs_dir: 'docs'  # The folder where your markdown files are stored
+site_dir: 'site'  # Where the static website will be generated
+
+# Define where to serve static images (by default, it's under img/)
+extra_templates:
+  - 'img/*.png'
+  - 'img/*.jpg'
+  - 'img/*.svg'
+
+# Static image folder (img/) will be accessible in markdown like:
+# ![Alt text](img/your_image.png)
