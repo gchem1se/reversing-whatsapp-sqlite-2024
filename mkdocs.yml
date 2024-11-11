@@ -6,14 +6,23 @@ site_author: gchem1se
 nav:
   - Home: index.md
   - Getting started: Getting started
-  - Notes on databases encryption and how to get your decryption key: Notes on databases encryption and how to get your decryption key
-  - Launching a backup manually: Launching a backup manually
+  - Contacts: 
+    - Recovering contacts from wa.db: Recovering contacts from wa.db
+    - Recovering contacts from Google Contacts: Recovering contacts from Google Contacts
+  - Notes on databases encryption:
+      - How to get your decryption key: How to get your decryption key
+      - Launching a backup manually: Launching a backup manually
   - Chats and Groups: Chats and Groups
-  - Get messages from a conversation: Get messages from a conversation
-  - Message attachments and media files: Message attachments and media files
-  - Contacts: Contacts
+  - Messages:
+      - Get messages from a conversation: Get messages from a conversation
+      - Answers to messages: Answers to messages
+  - Attachments: 
+    - Media attachments: Media attachments
+    - Other kinds of attachments:
+        - Polls: Polls
+        - Locations: Locations
   - System messages: System messages
-  - Stickers: Stickers
+  - Recovering your sticker packs: Recovering your sticker packs
   - Statistics: Statistics
   - Queries: Queries
 

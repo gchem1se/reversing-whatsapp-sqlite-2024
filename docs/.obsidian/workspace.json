@@ -4,22 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "0ef9ca5f04eed922",
+        "id": "a3640e0a9149c531",
         "type": "tabs",
         "children": [
           {
-            "id": "20d718f126476748",
+            "id": "101e41c030d2fc3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Getting started.md",
+                "file": "Media attachments.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a3b7fcd75e4733a9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "How to get your decryption key.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "75f03a8ec95d5f27",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Locations.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -48,7 +73,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "text",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -85,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Getting started.md",
+                "file": "Locations.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Getting started.md",
+                "file": "Locations.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Getting started.md"
+                "file": "Locations.md"
               }
             }
           }
@@ -146,33 +171,40 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "20d718f126476748",
+  "active": "75f03a8ec95d5f27",
   "lastOpenFiles": [
-    "Chats and Groups.md",
-    "Getting started.md",
+    "How to get your decryption key.md",
+    "Media attachments.md",
+    "Locations.md",
+    "Polls.md",
+    "How to get your decryption key 1.md",
+    "Recovering contacts from Google Contacts.md",
+    "Recovering your sticker packs.md",
+    "Recovering contacts from wa.db.md",
     "Get messages from a conversation.md",
-    "img/custom.css",
-    "Notes on databases encryption and how to get your decryption key.md",
-    "Message attachments and media files.md",
+    "Other kinds of attachments.md",
+    "Getting started.md",
+    "Launching a backup manually.md",
     "index.md",
+    "System messages.md",
+    "Chats and Groups.md",
+    "Calls.md",
+    "Statistics.md",
+    "Queries.md",
+    "Answers to messages.md",
+    "img/Pasted image 20241004024025.png",
+    "img/Pasted image 20241004014759.png",
+    "img/Pasted image 20241004014540.png",
+    "img/Pasted image 20241004013342.png",
+    "img/Pasted image 20241003200709.png",
+    "img/custom.css",
     "Index.md",
     "shell.sh",
-    "Contacts.md",
-    "Launching a backup manually.md",
-    "Statistics.md",
-    "System messages.md",
-    "Stickers.md",
-    "Queries.md",
     "img/Pasted image 20241001013122.png",
     "img/Pasted image 20241001013117.png",
     "img/Pasted image 20241001012823.png",
     "img/Pasted image 20241001012402.png",
     "img/Pasted image 20241001005236.png",
-    "img/Pasted image 20241001003459.png",
-    "img/Pasted image 20241001003456.png",
-    "img/Pasted image 20241001003147.png",
-    "img/Pasted image 20241001003135.png",
-    "img/Pasted image 20241001001230.png",
     "Key tables and relations.md",
     "img",
     "Groups.md"
