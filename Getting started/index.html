@@ -1,0 +1,962 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation powered by MkDocs">
+      
+      
+        <meta name="author" content="gchem1se">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Getting started - Reversing WhatsApp's SQLite</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../img/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#axioms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Reversing WhatsApp&#39;s SQLite" class="md-header__button md-logo" aria-label="Reversing WhatsApp's SQLite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Reversing WhatsApp's SQLite
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Reversing WhatsApp&#39;s SQLite" class="md-nav__button md-logo" aria-label="Reversing WhatsApp's SQLite" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Reversing WhatsApp's SQLite
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Getting started" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Contacts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Contacts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recovering contacts from wa.db" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recovering contacts from wa.db
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recovering contacts from Google Contacts" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recovering contacts from Google Contacts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Notes on databases encryption
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Notes on databases encryption
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How to get your decryption key" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to get your decryption key
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Launching a backup manually" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Launching a backup manually
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chats and Groups" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chats and Groups
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Messages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Messages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Get messages from a conversation" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Get messages from a conversation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Answers to messages" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Answers to messages
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Attachments
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Attachments
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Media attachments" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Media attachments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Other kinds of attachments
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Other kinds of attachments
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Polls" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Polls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Locations" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../System messages" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System messages
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Recovering your sticker packs" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recovering your sticker packs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Statistics" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Queries" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Queries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#axioms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Axioms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whatsapps-directory-structure-on-an-android-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      WhatsApp's directory structure on an Android device
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Getting started</h1>
+
+<div class="admonition warning">
+<p class="admonition-title">In a rush?</p>
+<p><em>If you only care about what queries you have to run to extract your data, you can just refer to the <a href="../Queries/">Queries</a> page, where you will find a bunch of. Also, if you are in such a rush, why not just use <a href="https://github.com/gchem1se/rechat">my tool</a>?</em></p>
+</div>
+<h2 id="axioms">Axioms</h2>
+<ul>
+<li>Since this project only aims to empower the user to recover their own messages and nothing more than that, I will frequently skip analyzing files, directories or SQL tables I don't find to be useful.</li>
+<li>This has been an individual project of mine for a year almost; I am basing this knowledge on different versions of WhatsApp and my own personal understanding of what the developers' choices were. So do expect something to not work as intended, or me openly saying I don't still have a clue of how something works.</li>
+<li>I will not analyze tables nor files that are clearly related to interactions with WhatsApp Business accounts or in-app payments.</li>
+<li>An instance of WhatsApp's application on an Android phone will mainly use two directories as storage for its data, one being protected by being access-restricted to normal system users because of Android's filesystem policies, and the other one fully accessible.<ul>
+<li>From now on we will refer to directory <code>/sdcard/Android/media/com.whatsapp</code> as <em>the user data folder</em> (fully accessible by any system user) and to directory <code>/sdcard/Android/data/com.whatsapp</code> as <em>the application data folder</em> (accessible only by privileged users).</li>
+</ul>
+</li>
+<li>From now on we will rely on the user having the possibility of decrypting its own local files, that is, on the user knowing what his decryption key is. Moreover, I will consider the user to have enabled the <em>end-to-end encryption</em> of the backup in WhatsApp's settings menu, that leads to all encrypted files having a <code>.crypt15</code> extension. Refer to <a href="../How%20to%20get%20your%20decryption%20key/">How to get your decryption key</a> for more details on that.</li>
+<li>Most of the files we are going to analyze are SQLite database files. <ul>
+<li>If you're not familiar with this DBMS or with SQL in general, I highly suggest you to get yourself a background before jumping into this. Moreover, I'll sometimes prefer showing you relations between tables and attributes by means of DBML diagrams instead of writing them down verbosely.</li>
+<li>To inspect these files and run queries on them I personally used <a href="https://sqlitebrowser.org/">DB Browser for SQLite</a>, although I had all sorts of random crashes trying opening bigger databases from older backups (we're talking millions of messages). I ultimately moved to a VSCode extension called <a href="https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer">SQLite Viewer</a> by <a href="https://marketplace.visualstudio.com/publishers/qwtel">Florian Klampfer</a> that worked much better, even if I had to tweak some setting beforehand. </li>
+</ul>
+</li>
+</ul>
+<h2 id="whatsapps-directory-structure-on-an-android-device">WhatsApp's directory structure on an Android device</h2>
+<p>Exploring the <em>user data folder</em> we are presented with this file structure:</p>
+<div class="highlight"><pre><span></span><code>WhatsApp
+|
++--- Backups/
+     |
+     +--- avatar-password.bkup.crypt15
+     +--- backup_settings.json.crypt15
+     +--- chatsettingsbackup.db.crypt15
+     +--- commerce_backup.db.crypt15
+     +--- stickers.db.crypt15
+     +--- wa.db.crypt15
++--- Databases/
+     |
+     +--- msgstore.db.crypt15
+     +--- msgstore-&lt;date&gt;.db.crypt15
+     +--- msgstore-increment-&lt;incremental number&gt;.db.crypt15
+     +--- msgstore-increment-&lt;incremental number&gt;-&lt;date&gt;.db.crypt15
++--- Media/
+     |
+     +--- WallPaper/
+     +--- WhatsApp Animated Gifs/
+     +--- WhatsApp Audio/
+     +--- WhatsApp Backup Excluded Stickers/
+     +--- WhatsApp Documents/
+     +--- WhatsApp Images/
+     +--- WhatsApp Sticker Packs/
+     +--- WhatsApp Stickers/
+     +--- WhatsApp Video/
+     +--- WhatsApp Video Notes/
+     +--- WhatsApp Voice Notes/
+</code></pre></div>
+<p>Some of these files are particularly useful to us. Let's analyze them:</p>
+<ul>
+<li>Files in the <code>Databases/</code> folder that <em>do not include a date in their filename</em> are files that got created in occasion of the <em>lastly occurred triggering</em> of the backup routine. Each time a new backup is process is launched, older files get renamed automatically to have appended their creation date.</li>
+<li>Messages you exchanged, as well as messages you received from WhatsApp's system (like messages about people joining or leaving groups you are a member of) are stored in <code>Databases/msgstore-...</code> files.<ul>
+<li>==<code>msgstore.db.cryptXX</code> is the main file you'd want to download on your PC for inspection. After decryption, it reveals itself to be a SQLite database storing all of your chat history.==</li>
+<li>even if they have <code>.db</code> extension, <code>-increment-</code> files are decrypted to <code>.zip</code> files, containing several <code>.json</code> files (that account for different modifications the database had since last backup was issued), apart from the <code>messages.bin</code> file, that actually contains data about messages exchanged in the day. I am not sure on what the encoding of this file is, but some information can be recovered by running <code>strings</code> on it.<ul>
+<li><a class="glightbox" href="../img/Pasted%20image%2020240930200812.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Pasted image 20240930200812.png" class="center" src="../img/Pasted%20image%2020240930200812.png" /></a></li>
+</ul>
+</li>
+<li>Even if they can surely be of some interest, proceeding with the actual analysis of our data we will discard the <code>-increment-</code> files to only work with the <code>msgstore</code> file,  which contains the majority of the information we are interested in. Recovering the fragmented information from these files can be hard and lead to minimal additional results. <a href="../Launching%20a%20backup%20manually/">Launching a backup manually</a> will get you a <code>msgstore</code> file containing all the messages you exchanged until that moment anyway.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">On the creation of <code>increment</code> files</p>
+<p>I'm not that sure about when <code>Databases/msgstore-increment...</code> are created, since they do not substitute <code>msgstore</code> files, which are bigger in size and still gets created every day if you enabled the daily backup routine. </p>
+<ul>
+<li>My best guess is that several <code>-increment-</code> files are created during periods between the triggering of backup creation routines. <ul>
+<li>For example, having set you backup routine to "Daily", you will find that during the day several of these files pop up in the folder, until the backup routine eventually gets launched (normally at 2:00 AM). </li>
+<li>When the time comes, information about what happened during the day will probably be reconstructed merging all of these <code>-increment-</code> files together and made into a new <code>msgstore</code> file, using the one from the previous day as baseline.</li>
+</ul>
+</li>
+</ul>
+</div>
+<ul>
+<li>Getting into most of the files that are present in the <code>Backups/</code> folder is out of the scope of this project, so let's spend some words only on two of them in particular:<ul>
+<li><code>stickers.db.crypt15</code> does not contain information about the stickers other people sent to you, but about your own sticker packs. <ul>
+<li>after decryption, it's a <code>.zip</code> file containing:<ul>
+<li><code>.png</code> files for your sticker packs cover images, with sticker pack names as filenames</li>
+<li><code>.webp</code> files with alphanumerical (that seem base64 encoded, but actually decode to gibberish) filenames which are your actual stickers (including animated stickers)</li>
+<li>a SQLite database named <code>sticker.db</code>, containing useful information such as frequently used stickers, starred stickers and the belongings of each file to a specific stickers pack. <ul>
+<li>Check out <a href="../Recovering%20your%20sticker%20packs/">Recovering your sticker packs</a> to see what the database contains in more details.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>wa.db.crypt15</code>: this is a file of particular interest to us because it contains information about your <em>contacts</em>. In particular, a table contained in this SQLite database contains the associations between the IDs of every user you chatted with their <em>names, as they are recorded in your phone contacts application</em>. It also contains their status phrases, some tables about <em>blocked</em> contacts, some statistics (like the total count of messages exchanged with that user/group) and so on.<ul>
+<li>However, there's a major problem to that: although this was the case some years ago, from a specific release of WhatsApp on, (we could date this with enough confidence in 2022: check out <a href="https://github.com/KnugiHK/WhatsApp-Chat-Exporter/issues/63#issuecomment-2310816596">this conversation about the issue</a>) <em>this file contains all empty tables</em>, and it seems like these information is not getting a local backup anymore. <em>The encrypted file gets created anyway, but contents are stripped out beforehand.</em></li>
+<li>We can still recover information about the contacts we chatted with by using the <code>msgstore</code> file, along with any other file that links phone numbers with names: for instance, the <em>CSV export</em> of your own <em>Google Contacts</em> application. Check out <a href="../Recovering%20contacts%20from%20wa.db/">Recovering contacts from wa.db</a> to know more about that.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>We will now move on to <a href="../Chats%20and%20Groups/">the actual analysis of the msgstore file</a>, which will get us to the core part of this project: recovering messages and their attachments, and associating them with the conversation they belong to, as well as to the sender.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../img/custom.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
